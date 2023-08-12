@@ -1,4 +1,8 @@
+using Entities.DTOs;
+using GeneratedDataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 
 namespace WebAPI.Controllers
 {
@@ -19,15 +23,40 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<object> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+
+            //throw new NotImplementedException();
+            LibraryManagementContext context = new LibraryManagementContext();
+            //var b1 = context.Books.Include(b => b.BookCategories);
+            ////var y = context.Books.Include(b => b.BookCategories).ThenInclude(b => b).ToList();
+
+
+            var books = context.Books
+                    .Include(b => b.BookCategories) // Include the BookCategories collection within Books
+                    .ThenInclude(bc => bc.Category)
+                    .Include(b=>b.Author)
+                    .ToList();
+
+
+            List<BookDetailDto> bookDetailDtos = new List<BookDetailDto>();
+            
+            foreach (var book in books)
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+
+                BookDetailDto bookDetailDto = new BookDetailDto();
+                bookDetailDto.BookName = book.Title;
+                bookDetailDto.Author = $"{book.Author.FirstName} {book.Author.LastName}";
+                bookDetailDtos.Add(bookDetailDto);
+
+            }
+
+
+
+            //var books = context.Books.ToList();
+
+            return bookDetailDtos;
         }
     }
 }

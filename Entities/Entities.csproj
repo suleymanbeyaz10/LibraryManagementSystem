@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OneDrive\Masaüstü\FinalProject-master\Core\Core.csproj" />
+  </ItemGroup>
+
 </Project>

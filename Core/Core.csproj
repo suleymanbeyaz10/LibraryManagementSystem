@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CrossCuttingConcerns\Cache\**" />
+    <EmbeddedResource Remove="CrossCuttingConcerns\Cache\**" />
+    <None Remove="CrossCuttingConcerns\Cache\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
@@ -15,10 +21,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CrossCuttingConcerns\Cache\" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
 
 namespace Core.DataAccess.EntityFramework
