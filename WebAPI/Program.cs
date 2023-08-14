@@ -1,4 +1,10 @@
 
+using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
 namespace WebAPI
 {
     public class Program
@@ -8,6 +14,8 @@ namespace WebAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSingleton<IBookService, BookManager>();
+            builder.Services.AddSingleton<IBookDal, EfBookDal>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

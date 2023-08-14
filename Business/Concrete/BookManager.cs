@@ -38,10 +38,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(), Messages.BooksListed);
         }
 
-        public IDataResult<List<BookDetailDto>> GetBookDetails()
+        public IDataResult<List<BookDetailDto>> GetBookDetails(int bookId)
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails());
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(bookId));
         }
+
 
         public IResult Update(Book book)
         {

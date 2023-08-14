@@ -15,5 +15,15 @@ namespace WebAPI.Controllers
             _bookService = bookService;
         }
 
+        [HttpGet("getbookdetailsbyid")]
+        public ActionResult GetBookDetailsById(int bookId)
+        {
+            var result = _bookService.GetBookDetails(bookId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+        }
     }
 }
