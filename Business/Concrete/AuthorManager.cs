@@ -5,35 +5,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class AuthorManager : IAuthorService
     {
+        private IAuthorDal _authorDal;
+
+        public AuthorManager(IAuthorDal authorDal)
+        {
+            _authorDal = authorDal;
+        }
+
         public IResult Add(Author author)
         {
-            throw new NotImplementedException();
+            _authorDal.Add(author);
+            return new SuccessResult();
         }
 
         public IResult Delete(Author author)
         {
-            throw new NotImplementedException();
+            _authorDal.Delete(author);
+            return new SuccessResult();
         }
 
         public IResult Update(Author author)
         {
-            throw new NotImplementedException();
+            _authorDal.Update(author);
+            return new SuccessResult();
         }
 
         public IDataResult<List<Author>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Author>>(_authorDal.GetAll());
         }
 
-        public IDataResult<Author> GetById(int id)
+        public IDataResult<Author> GetAuthorById(int authorId)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Author>(_authorDal.Get(p => p.Id == authorId));
         }
     }
 }

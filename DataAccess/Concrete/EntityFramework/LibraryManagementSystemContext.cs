@@ -23,6 +23,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Member> Members { get; set; }
         public DbSet<BorrowedBook> BorrowedBooks { get; set; }
         public DbSet<BookCategories> BookCategories { get; set; }
+        public DbSet<BookCopy> BookCopies { get; set; }
 
     }
 }

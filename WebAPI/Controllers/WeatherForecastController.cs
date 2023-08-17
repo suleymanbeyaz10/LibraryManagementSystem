@@ -1,8 +1,8 @@
 using Entities.DTOs;
-using GeneratedDataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
+using GeneratedDataAccess.Models2;
 
 namespace WebAPI.Controllers
 {

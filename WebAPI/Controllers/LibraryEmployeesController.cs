@@ -7,55 +7,56 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class LibraryEmployeesController : ControllerBase
     {
-        IBookService _bookService;
+        private ILibraryEmployeeService _libraryEmployeeService;
 
-        public BooksController(IBookService bookService)
+        public LibraryEmployeesController(ILibraryEmployeeService libraryEmployeeService)
         {
-            _bookService = bookService;
+            _libraryEmployeeService = libraryEmployeeService;
         }
 
         [HttpGet("getall")]
-        public ActionResult GetAll()
+
+        public IActionResult GetAll()
         {
-            var result = _bookService.GetAllBookDetails();
+            var result = _libraryEmployeeService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpPost("add")]
 
-        public IActionResult Add(Book book)
+        public IActionResult Add(LibraryEmployee libraryEmployee)
         {
-            var result = _bookService.Add(book);
+            var result = _libraryEmployeeService.Add(libraryEmployee);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
+
         [HttpPost("delete")]
 
-        public IActionResult Delete(Book book)
+        public IActionResult Delete(LibraryEmployee libraryEmployee)
         {
-            var result = _bookService.Delete(book);
+            var result = _libraryEmployeeService.Delete(libraryEmployee);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
+
         [HttpPost("update")]
 
-        public IActionResult Update(Book book)
+        public IActionResult Edit(LibraryEmployee libraryEmployee)
         {
-            var result = _bookService.Update(book);
+            var result = _libraryEmployeeService.Update(libraryEmployee);
             if (result.Success)
             {
                 return Ok(result);
@@ -63,16 +64,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-
-        [HttpGet("getbookdetails")]
-        public ActionResult GetBookDetails(string searchText = "")
+        [HttpGet("getbyid")]
+        public IActionResult Get(int employeeId)
         {
-            var result = _bookService.GetBookDetails(searchText);
+            var result = _libraryEmployeeService.GetById(employeeId);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
+
     }
 }

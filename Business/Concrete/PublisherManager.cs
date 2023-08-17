@@ -6,24 +6,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
     public class PublisherManager : IPublisherService
     {
+        private IPublisherDal _publisherDal;
+
+        public PublisherManager(IPublisherDal publisherDal)
+        {
+            _publisherDal = publisherDal;
+        }
         public IResult Add(Publisher publisher)
         {
-            throw new NotImplementedException();
+            _publisherDal.Add(publisher);
+            return new SuccessResult();
         }
 
-        public IResult Delete(Book book)
+        public IResult Delete(Publisher publisher)
         {
-            throw new NotImplementedException();
+            _publisherDal.Delete(publisher);
+            return new SuccessResult();
         }
 
         public IResult Update(Publisher publisher)
         {
-            throw new NotImplementedException();
+            _publisherDal.Update(publisher);
+            return new SuccessResult();
+        }
+
+        public IDataResult<List<Publisher>> GetAll()
+        {
+            return new SuccessDataResult<List<Publisher>>(_publisherDal.GetAll());
         }
     }
 }

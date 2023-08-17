@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeneratedDataAccess.Models;
+namespace GeneratedDataAccess.Models2;
 
 public partial class LibraryManagementContext : DbContext
 {
@@ -20,6 +20,8 @@ public partial class LibraryManagementContext : DbContext
     public virtual DbSet<Book> Books { get; set; }
 
     public virtual DbSet<BookCategory> BookCategories { get; set; }
+
+    public virtual DbSet<BookCopy> BookCopies { get; set; }
 
     public virtual DbSet<BorrowedBook> BorrowedBooks { get; set; }
 
@@ -78,16 +80,28 @@ public partial class LibraryManagementContext : DbContext
                 .HasConstraintName("FK_BookCategories_Categories");
         });
 
+        modelBuilder.Entity<BookCopy>(entity =>
+        {
+            entity.Property(e => e.CopyNumber).HasMaxLength(50);
+            entity.Property(e => e.Status)
+                .HasMaxLength(16)
+                .IsFixedLength();
+
+            entity.HasOne(d => d.Book).WithMany(p => p.BookCopies)
+                .HasForeignKey(d => d.BookId)
+                .HasConstraintName("FK_BookCopies_Books");
+        });
+
         modelBuilder.Entity<BorrowedBook>(entity =>
         {
             entity.Property(e => e.BorrowDate).HasColumnType("datetime");
             entity.Property(e => e.DueDate).HasColumnType("datetime");
             entity.Property(e => e.ReturnDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.Book).WithMany(p => p.BorrowedBooks)
-                .HasForeignKey(d => d.BookId)
+            entity.HasOne(d => d.BookCopy).WithMany(p => p.BorrowedBooks)
+                .HasForeignKey(d => d.BookCopyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_BorrowedBooks_Books");
+                .HasConstraintName("FK_BorrowedBooks_BorrowedBooks1");
 
             entity.HasOne(d => d.Member).WithMany(p => p.BorrowedBooks)
                 .HasForeignKey(d => d.MemberId)

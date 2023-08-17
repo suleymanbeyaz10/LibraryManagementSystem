@@ -12,5 +12,6 @@ namespace Business.Constants
         public static string BookDeleted = "Kitap kütüphaneden kaldırıldı.";
         public static string BookUpdated = "Kitap güncellendi.";
         public static string BooksListed = "Tüm kitaplar listelendi.";
+        public static string SearchedBooks = "Aranan kitaplar...";
     }
 }

@@ -15,7 +15,8 @@ namespace Business.Abstract
         IResult Update(Book book);
         IResult Delete(Book book);
         IDataResult<List<Book>> GetAll();
-        IDataResult<List<BookDetailDto>> GetBookDetails(int bookId);
+        IDataResult<List<BookDetailDto>> GetAllBookDetails();
+        IDataResult<List<BookDetailDto>> GetBookDetails(string searchText);
 
     }
 }

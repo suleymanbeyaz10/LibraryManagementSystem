@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IResult Add(Publisher publisher);
         IResult Update(Publisher publisher);
-        IResult Delete(Book book);
+        IResult Delete(Publisher publisher);
+        IDataResult<List<Publisher>> GetAll();
     }
 }

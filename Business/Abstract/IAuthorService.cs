@@ -14,6 +14,6 @@ namespace Business.Abstract
         IResult Delete(Author author);
         IResult Update(Author author);
         IDataResult<List<Author>> GetAll();
-        IDataResult<Author> GetById(int id);
+        IDataResult<Author> GetAuthorById(int authorId);
     }
 }

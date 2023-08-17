@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -21,6 +23,7 @@ namespace Business.Concrete
             _bookDal = bookDal;
         }
 
+        [ValidationAspect(typeof(BookValidator))]
         public IResult Add(Book book)
         {
             _bookDal.Add(book);
@@ -38,9 +41,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(), Messages.BooksListed);
         }
 
-        public IDataResult<List<BookDetailDto>> GetBookDetails(int bookId)
+        public IDataResult<List<BookDetailDto>> GetAllBookDetails()
         {
-            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(bookId));
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetAllBookDetails(), Messages.BooksListed);
+        }
+
+        public IDataResult<List<BookDetailDto>> GetBookDetails(string searchText)
+        {
+            return new SuccessDataResult<List<BookDetailDto>>(_bookDal.GetBookDetails(searchText), Messages.SearchedBooks);
         }
 
 

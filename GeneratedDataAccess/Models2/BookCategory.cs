@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GeneratedDataAccess.Models;
+namespace GeneratedDataAccess.Models2;
 
 public partial class BookCategory
 {

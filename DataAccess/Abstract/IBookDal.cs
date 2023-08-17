@@ -12,6 +12,7 @@ namespace DataAccess.Abstract
 {
     public interface IBookDal : IEntityRepository<Book>
     {
-        List<BookDetailDto> GetBookDetails(int bookId);
+        List<BookDetailDto> GetAllBookDetails();
+        List<BookDetailDto> GetBookDetails(string searchText);
     }
 }

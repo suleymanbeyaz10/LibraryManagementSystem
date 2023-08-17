@@ -7,72 +7,73 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class AuthorsController : ControllerBase
     {
-        IBookService _bookService;
+        IAuthorService _authorService;
 
-        public BooksController(IBookService bookService)
+        public AuthorsController(IAuthorService authorService)
         {
-            _bookService = bookService;
+            _authorService = authorService;
         }
 
         [HttpGet("getall")]
-        public ActionResult GetAll()
+
+        public IActionResult GetAll()
         {
-            var result = _bookService.GetAllBookDetails();
+            var result = _authorService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyauthorid")]
+
+        public IActionResult Get(int authorId)
+        {
+            var result = _authorService.GetAuthorById(authorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpPost("add")]
 
-        public IActionResult Add(Book book)
+        public IActionResult Add(Author author)
         {
-            var result = _bookService.Add(book);
+            var result = _authorService.Add(author);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
+
         [HttpPost("delete")]
 
-        public IActionResult Delete(Book book)
+        public IActionResult Delete(Author author)
         {
-            var result = _bookService.Delete(book);
+            var result = _authorService.Delete(author);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
+
         [HttpPost("update")]
 
-        public IActionResult Update(Book book)
+        public IActionResult Update(Author author)
         {
-            var result = _bookService.Update(book);
+            var result = _authorService.Update(author);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-        }
-
-
-        [HttpGet("getbookdetails")]
-        public ActionResult GetBookDetails(string searchText = "")
-        {
-            var result = _bookService.GetBookDetails(searchText);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest();
         }
     }
 }

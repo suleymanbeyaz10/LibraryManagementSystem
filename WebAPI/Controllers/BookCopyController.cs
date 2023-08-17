@@ -7,19 +7,20 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class BookCopiesController : ControllerBase
     {
-        IBookService _bookService;
+        IBookCopyService _bookCopyService;
 
-        public BooksController(IBookService bookService)
+        public BookCopiesController(IBookCopyService bookCopyService)
         {
-            _bookService = bookService;
+            _bookCopyService = bookCopyService;
         }
 
         [HttpGet("getall")]
+
         public ActionResult GetAll()
         {
-            var result = _bookService.GetAllBookDetails();
+            var result = _bookCopyService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -28,34 +29,31 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-
-        public IActionResult Add(Book book)
+        public ActionResult Add(BookCopy bookCopy)
         {
-            var result = _bookService.Add(book);
+            var result = _bookCopyService.Add(bookCopy);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
+
         [HttpPost("delete")]
-
-        public IActionResult Delete(Book book)
+        public ActionResult Delete(BookCopy bookCopy)
         {
-            var result = _bookService.Delete(book);
+            var result = _bookCopyService.Delete(bookCopy);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
+
         [HttpPost("update")]
-
-        public IActionResult Update(Book book)
+        public ActionResult Update(BookCopy bookCopy)
         {
-            var result = _bookService.Update(book);
+            var result = _bookCopyService.Update(bookCopy);
             if (result.Success)
             {
                 return Ok(result);
@@ -63,16 +61,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbookbyid")]
 
-        [HttpGet("getbookdetails")]
-        public ActionResult GetBookDetails(string searchText = "")
+        public ActionResult GetBookById(int bookId)
         {
-            var result = _bookService.GetBookDetails(searchText);
+            var result = _bookCopyService.GetBookById(bookId);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
+
     }
 }

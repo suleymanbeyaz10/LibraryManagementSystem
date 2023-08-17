@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GeneratedDataAccess.Models;
+namespace GeneratedDataAccess.Models2;
 
 public partial class Book
 {
@@ -21,7 +21,7 @@ public partial class Book
 
     public virtual ICollection<BookCategory> BookCategories { get; set; } = new List<BookCategory>();
 
-    public virtual ICollection<BorrowedBook> BorrowedBooks { get; set; } = new List<BorrowedBook>();
+    public virtual ICollection<BookCopy> BookCopies { get; set; } = new List<BookCopy>();
 
     public virtual Publisher Publisher { get; set; } = null!;
 }
