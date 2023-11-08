@@ -30,9 +30,9 @@ namespace WebAPI.Controllers
 
         [HttpPost("add")]
 
-        public IActionResult Add(BookCopy bookCopy)
+        public IActionResult Add(BorrowedBook borrowedBook)
         {
-            var result = _borrowedBooksService.Add(bookCopy);
+            var result = _borrowedBooksService.Add(borrowedBook);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,9 +42,9 @@ namespace WebAPI.Controllers
 
         [HttpPost("delete")]
 
-        public IActionResult Delete(BookCopy bookCopy)
+        public IActionResult Delete(BorrowedBook borrowedBook)
         {
-            var result = _borrowedBooksService.Delete(bookCopy);
+            var result = _borrowedBooksService.Delete(borrowedBook);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,9 +54,9 @@ namespace WebAPI.Controllers
 
         [HttpPost("update")]
 
-        public IActionResult Update(BookCopy bookCopy)
+        public IActionResult Update(BorrowedBook borrowedBook)
         {
-            var result = _borrowedBooksService.Update(bookCopy);
+            var result = _borrowedBooksService.Update(borrowedBook);
             if (result.Success)
             {
                 return Ok(result);
